@@ -14,7 +14,7 @@ def validar_alvo(alvo):
     try:
         ip_alvo = socket.gethostbyname(alvo)
         return True, ip_alvo
-    except socker.gaierror:
+    except socket.gaierror:
         return False, "Erro: Não foi possível processar o domínio."
 
 def montar_requisicao_http:
