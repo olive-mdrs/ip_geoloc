@@ -1,4 +1,4 @@
-from core.network import validar_alvo, fazer_requisicao_api, extrair_dados_json
+from core.ipinfo import validar_alvo, fazer_requisicao_api, extrair_dados_json
 from core.shodan import buscar_dados_shodan
 from core.scanner import escanear_portas_alvo
 
