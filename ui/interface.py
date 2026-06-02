@@ -48,15 +48,35 @@ class GeolocApp(App):
         """Ação disparada ao apertar a tecla 'c'."""
         tela = self.query_one("#tela_resultados", RichLog)
         tela.clear()
-    # --- Tratamento de Eventos ---
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        #TODO
-    
-    def on_input_submitted(self, event: Input.Submitted) -> None:
-        #TODO
-    def iniciar_busca(self) -> None:
-        #TODO
 
+    # --- Tratamento de Eventos ---
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        """Disparado quando o botão é clicado."""
+        if event.button.id == "btn_buscar":
+            self.iniciar_busca()
+
+    def on_input_submitted(self, event: Input.Submitted) -> None:
+        """Disparado quando o usuário aperta ENTER no Input."""
+        if event.input.id == "input_ip":
+            self.iniciar_busca()
+
+    def iniciar_busca(self) -> None:
+        """Captura o texto e inicia o processo de rede."""
+        input_widget = self.query_one("#input_ip", Input)
+        alvo = input_widget.value.strip()
+        
+        if not alvo:
+            return
+
+        tela = self.query_one("#tela_resultados", RichLog)
+        tela.write(f"[bold yellow]Resolvendo e buscando dados para:[/bold yellow] {alvo}...")
+        
+        # Chama a função que faz o trabalho pesado de rede
+        self.executar_requisicao_rede(alvo)
+        
+        input_widget.value = "" # Limpa a caixa de texto
+    # ---- Roda a requisição em uma segunda thread ----
     @work(thread=True)
     def executar_requisicao_rede(self, alvo: str) -> None:
         """
