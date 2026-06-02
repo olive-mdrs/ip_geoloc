@@ -8,7 +8,7 @@ Este projeto é uma aplicação Cliente com Interface de Terminal (TUI) desenvol
 geolocalizador/
 ├── main.py                 # Ponto de entrada (Inicializa a TUI)
 ├── core/
-│   └── network.py          # Lógica de Sockets e parsing HTTP/JSON
+│   └── network.py          # Lógica principal da aplicação fazendo requisição à API utilizada
 ├── ui/
 │   └── interface.py        # Telas e tratamento de eventos (Textual)
 ├── requirements.txt        # Dependências do projeto
