@@ -46,5 +46,24 @@ def extrair_dados_json(resposta):
     except ValueError:
         return False, "Erro: A resposta do servidor não é um JSON válido."
 
-def def buscar_dados_ip(alvo):
-    #TODO
+def buscar_dados_ip(alvo):
+    """
+    Função orquestradora: Coordena as etapas modulares de resolução, requisição e parsing.
+    Retorna: (Sucesso: bool, Resultado: dict ou str)
+    """
+    # 1. Resolução DNS
+    sucesso_dns, ip_alvo = validar_alvo(alvo)
+    if not sucesso_dns:
+        return False, ip_alvo
+        
+    # 2. Transação HTTP
+    sucesso_http, resposta = fazer_requisicao_api(ip_alvo)
+    if not sucesso_http:
+        return False, resposta
+        
+    # 3. Parsing do JSON
+    sucesso_json, dados_json = extrair_dados_json(resposta)
+    if not sucesso_json:
+        return False, dados_json
+        
+    return True, dados_json
