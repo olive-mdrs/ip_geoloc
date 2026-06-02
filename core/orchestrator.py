@@ -1,4 +1,4 @@
-from core.network import resolver_alvo, fazer_requisicao_api, extrair_dados_json
+from core.network import validar_alvo, fazer_requisicao_api, extrair_dados_json
 from core.shodan import buscar_dados_shodan
 from core.scanner import escanear_portas_alvo
 
@@ -9,7 +9,7 @@ def executar_analise_completa(alvo, portas_str):
     resultado_final = {}
     
     # FASE 1: Resolução DNS
-    sucesso_dns, ip_alvo = resolver_alvo(alvo)
+    sucesso_dns, ip_alvo = validar_alvo(alvo)
     if not sucesso_dns:
         return False, ip_alvo
     
