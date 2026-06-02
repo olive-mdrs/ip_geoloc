@@ -18,7 +18,7 @@ class GeolocApp(App):
 
     BINDINGS = [
         ("q", "quit", "Sair"),
-        ("c", "clear_log", "Limpar Tela")
+        ("ctrl+l", "clear_log", "Limpar Tela")
     ]
 
     def compose(self) -> ComposeResult:
