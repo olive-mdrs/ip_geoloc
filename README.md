@@ -19,11 +19,19 @@ geolocalizador/
 
 Recomenda-se a criacao de um ambiente virtual Python isolado para a instalacao das dependencias.
 
-1. Instale as dependencias da interface grafica:
+1. Clone o repositorio ou baixe a pasta do projeto.
+
+2. Abra o terminal na raiz do projeto e crie o ambiente virtual:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
+   
+3. Instale as dependencias da interface grafica:
    ```bash
    pip install -r requirements.txt
    ```
-2. Execute a aplicação:
+4. Execute a aplicação:
    ```bash
    python main.py
    ```
