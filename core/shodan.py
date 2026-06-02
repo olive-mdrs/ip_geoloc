@@ -23,19 +23,19 @@ def buscar_dados_shodan(ip_alvo):
     cliente.settimeout(5.0)
     
     try:
-        # Envolve o socket cru com a camada TLS antes de conectar
+        # Envolve o socket com a camada TLS antes de conectar
         conexao_segura = contexto.wrap_socket(cliente, server_hostname=host)
         conexao_segura.connect((host, porta))
         conexao_segura.sendall(requisicao.encode('utf-8'))
         
-        resposta_crua = b""
+        resposta = b""
         while True:
             dados = conexao_segura.recv(4096)
             if not dados:
                 break
-            resposta_crua += dados
+            resposta += dados
             
-        resposta_texto = resposta_crua.decode('utf-8', errors='ignore')
+        resposta_texto = resposta.decode('utf-8', errors='ignore')
         
         if "\r\n\r\n" not in resposta_texto:
              return False, "Resposta inválida do servidor Shodan."

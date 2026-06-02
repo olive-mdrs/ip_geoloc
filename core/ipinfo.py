@@ -15,7 +15,7 @@ def validar_alvo(alvo):
 
 def fazer_requisicao_api(ip_alvo):
     """
-    Camada de Transporte e Aplicação: Sockets TCP Crus.
+    Camada de Transporte e Aplicação: Sockets TCP.
     """
     # Construção manual do cabeçalho HTTP
     requisicao = (
@@ -36,15 +36,15 @@ def fazer_requisicao_api(ip_alvo):
         cliente.sendall(requisicao.encode('utf-8'))
         
         # Recebendo a resposta fragmentada
-        resposta_crua = b""
+        resposta = b""
         while True:
             dados = cliente.recv(4096)
             if not dados:
                 break
-            resposta_crua += dados
+            resposta += dados
             
         # Decodificando os bytes recebidos para texto
-        return True, resposta_crua.decode('utf-8', errors='ignore')
+        return True, resposta.decode('utf-8', errors='ignore')
         
     except Exception as e:
         return False, f"Erro na comunicação HTTP via socket: {e}"
