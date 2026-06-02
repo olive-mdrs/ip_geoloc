@@ -21,7 +21,7 @@ def fazer_requisicao_api(ip_alvo):
     requisicao = (
         f"GET /{ip_alvo}/json HTTP/1.1\r\n"
         f"Host: {API_HOST}\r\n"
-        "User-Agent: ClienteRedes-UFS/5.0\r\n"
+        "User-Agent: ClienteRedes-UFRN/5.0\r\n"
         "Connection: close\r\n\r\n"
     )
     

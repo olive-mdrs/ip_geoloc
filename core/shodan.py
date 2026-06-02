@@ -9,11 +9,11 @@ def buscar_dados_shodan(ip_alvo):
     host = "internetdb.shodan.io"
     porta = 443 # Porta padrão para HTTPS
     
-    # Requisição HTTP padrão, mas trafegará criptografada
+    # Requisição HTTP padrão - Corrigido para UFRN
     requisicao = (
         f"GET /{ip_alvo} HTTP/1.1\r\n"
         f"Host: {host}\r\n"
-        "User-Agent: ClienteRedes-UFS/5.0\r\n"
+        "User-Agent: ClienteRedes-UFRN/5.0\r\n"
         "Connection: close\r\n\r\n"
     )
     
@@ -21,6 +21,7 @@ def buscar_dados_shodan(ip_alvo):
     contexto = ssl.create_default_context()
     cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     cliente.settimeout(5.0)
+    conexao_segura = None
     
     try:
         # Envolve o socket com a camada TLS antes de conectar
@@ -52,8 +53,10 @@ def buscar_dados_shodan(ip_alvo):
         return False, f"Erro ao consultar Shodan via socket seguro: {e}"
         
     finally:
-        try:
-            # Importante fechar a conexão criptografada
-            conexao_segura.close()
-        except:
-            pass
+        # Garante o fechamento seguro de qualquer estrutura que tenha sido aberta
+        if conexao_segura:
+            try: conexao_segura.close() 
+            except: pass
+        elif cliente:
+            try: cliente.close() 
+            except: pass
