@@ -5,6 +5,6 @@ from textual import work
 
 from core.network import buscar_dados_ip
 
-class GeolocalizadorApp(App):
+class GeolocApp(App):
     TODO
 
