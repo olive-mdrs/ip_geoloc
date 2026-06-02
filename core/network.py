@@ -1,9 +1,8 @@
 import socket
-import json
+import requests
 
 # Definindo constantes
 API_HOST = "ipinfo.io"
-API_PORT = 80
 TIMEOUT = 10.0
 
 def validar_alvo(alvo):
@@ -17,20 +16,35 @@ def validar_alvo(alvo):
     except socket.gaierror:
         return False, "Erro: Não foi possível processar o domínio."
 
-def montar_requisicao_http:
+def fazer_requisicao_api(ip_alvo):
     """
-    Camada de Aplicacao: Constrói o texto da requisicao HTTP GET.
-    Retorna: String da requisição.
+    Camada de Aplicação (HTTP): O requests gerencia a conexão TCP e os cabeçalhos HTTP.
+    Retorna: (Sucesso: bool, Objeto Resposta ou Mensagem de Erro: str)
     """
-    return (
-        f"GET /{ip_alvo}/json HTTP/1.1\r\n"
-        f"Host: {host}\r\n"
-        "User-Agent: ClienteRedes-UFS/3.0\r\n"
-        "Connection: close\r\n\r\n"
-    )
-def executar_transacao_tcp(host, porta, requisicao_str):
-    #TODO
-def extrair_corpo_json(resposta_texto):
-    #TODO
+    url = f"http://{API_HOST}/{ip_alvo}/json"
+    cabecalhos = {"User-Agent": "ClienteRedes-UFS/4.0"}
+    
+    try:
+        resposta = requests.get(url, headers=cabecalhos, timeout=TIMEOUT)
+        
+        # O raise_for_status() aciona um erro automaticamente se o servidor 
+        # responder com algo como 404 (Não Encontrado) ou 500 (Erro Interno)
+        resposta.raise_for_status()
+        
+        return True, resposta
+    except requests.exceptions.RequestException as e:
+        return False, f"Erro na comunicação HTTP com o servidor: {e}"
+
+def extrair_dados_json(resposta):
+    """
+    Processamento: Usa o decodificador nativo do requests para extrair o JSON.
+    Retorna: (Sucesso: bool, Dicionário JSON ou Mensagem de Erro: str)
+    """
+    try:
+        dados_json = resposta.json()
+        return True, dados_json
+    except ValueError:
+        return False, "Erro: A resposta do servidor não é um JSON válido."
+
 def def buscar_dados_ip(alvo):
     #TODO
