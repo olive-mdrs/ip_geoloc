@@ -49,9 +49,14 @@ Recomenda-se a criacao de um ambiente virtual Python isolado para a instalacao d
 * O painel também exibirá as portas abertas detectadas e as vulnerabilidades cruzadas com o banco de dados do Shodan.
 * Use a tecla 'ctrl + L' para limpar a tela e 'q' para encerrar o programa.
 
-## Testes Unitários
+## Testes Unitários e de Integração
 
-O projeto possui um arquivo de testes focada em validar o comportamento da Camada de Aplicação, especificamente o algoritmo responsável pelo parsing (separação) de cabeçalhos HTTP crus e a extração segura do corpo JSON retornado pelos sockets.
+O projeto possui um arquivo de testes focado em validar o comportamento da Camada de Aplicação e de Transporte, dividido em duas etapas:
+
+O projeto possui uma suíte de testes dividida em duas etapas para validar o comportamento da Camada de Aplicação e de Transporte:
+
+1. **Testes Unitários (Offline):** Validam o algoritmo responsável pelo parsing (separação) de cabeçalhos HTTP crus e a extração segura do corpo JSON retornado, simulando cenários de sucesso e de respostas malformadas.
+2. **Testes de Integração (Online):** Realizam uma conexão TCP real de ponta a ponta com um endereço público estável (DNS do Google - 8.8.8.8) para comprovar o tráfego de dados via sockets na prática, extraindo e imprimindo o retorno real no terminal.
 
 Para rodar os testes localmente, certifique-se de estar na raiz do projeto e execute:
 
