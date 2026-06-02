@@ -1,4 +1,4 @@
-# Cliente TCP de Geolocalização e Análise de IPs
+# GeoSec TUI
 
 Este projeto é uma aplicação Cliente com Interface de Terminal (TUI) desenvolvida para a disciplina de Redes de Computadores (Bacharelado em Tecnologia da Informação/UFRN). O software atua em duas frentes principais de reconhecimento de rede utilizando sockets: consome a API pública do ipinfo.io para rastrear dados geográficos e de infraestrutura, e integra-se à API do Shodan InternetDB via sockets seguros (TLS) para mapeamento de portas e identificação de vulnerabilidades (CVEs).
 
