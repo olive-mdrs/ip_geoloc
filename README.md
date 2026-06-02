@@ -1,6 +1,6 @@
 # Cliente TCP de Geolocalização de IPs
 
-Este projeto é uma aplicação Cliente com Interface de Terminal (TUI) desenvolvida para a disciplina de Redes de Computadores. O software consome a API pública do ipinfo.io para rastrear dados geográficos, de infraestrutura e de segurança de endereços de rede.
+Este projeto é uma aplicação Cliente com Interface de Terminal (TUI) desenvolvida para a disciplina de Redes de Computadores (Bacharelado em Tecnologia da Informação/UFRN). O software consome a API pública do ipinfo.io para rastrear dados geográficos, de infraestrutura e de segurança de endereços de rede.
 
 ## Arquitetura do Projeto
 
