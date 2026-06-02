@@ -1,6 +1,6 @@
 import unittest
 import json
-from core.network import fazer_requisicao_api, extrair_dados_json
+from core.ipinfo import fazer_requisicao_api, extrair_dados_json
 
 class TestParsingHTTP(unittest.TestCase):
     """Testes Unitários: Validação da lógica interna sem uso de rede."""
